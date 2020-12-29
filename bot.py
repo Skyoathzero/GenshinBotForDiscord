@@ -44,4 +44,6 @@ async def logout(ctx):
     await ctx.send(embed=embed)
 
     await bot.logout()
+
+
 bot.run(secret_file['token'])
