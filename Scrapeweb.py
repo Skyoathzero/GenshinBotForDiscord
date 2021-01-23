@@ -14,20 +14,45 @@ INFO = {"card_info1":"","image1":"","link1":"",
 linktodatabase = 'https://www.gensh.in'
 def addtodictINFO(cards):
     newcards = [card.get_text() for card in cards]
-    INFO["card_info1"] = newcards[0]
-    INFO["card_info2"] = newcards[1]
-    INFO["card_info3"] = newcards[2]
-    INFO["card_info4"] = newcards[3]
+    try:
+        INFO["card_info1"] = newcards[0]
+    except : INFO["card_info1"] = ""
+    try:
+        INFO["card_info2"] = newcards[1]
+    except : INFO["card_info2"] = ""
+    try:
+        INFO["card_info3"] = newcards[2]
+    except : INFO["card_info3"] = ""
+    try:
+        INFO["card_info4"] = newcards[3]
+    except : INFO["card_info4"] = ""
 def addtodictIMG(img):
-    INFO['image1'] = linktodatabase + img[0]
-    INFO['image2'] = linktodatabase + img[1]
-    INFO['image3'] = linktodatabase + img[2]
-    INFO['image4'] = linktodatabase + img[3]
+    try:
+        INFO['image1'] = linktodatabase + img[0]
+    except : INFO['image1'] = ""
+    try:
+        INFO['image2'] = linktodatabase + img[1]
+    except : INFO['image2'] = ""
+    try:
+        INFO['image3'] = linktodatabase + img[2]
+    except : INFO['image3'] = ""
+    try:
+        INFO['image4'] = linktodatabase + img[3]
+    except : INFO['image4'] = ""
 def addtodictLINKS(links):
-    INFO['link1'] = linktodatabase + links[0]
-    INFO['link2'] = linktodatabase + links[1]
-    INFO['link3'] = linktodatabase + links[2]
-    INFO['link4'] = linktodatabase + links[3]
+    try:
+        INFO['link1'] = linktodatabase + links[0]
+    except : INFO['link1'] = ""
+    try:
+        INFO['link2'] = linktodatabase + links[1]
+    except : INFO['link2'] = ""
+    try:
+        INFO['link3'] = linktodatabase + links[2]
+    except : INFO['link3'] = ""
+    try:
+        INFO['link4'] = linktodatabase + links[3]
+    except : INFO['link4'] = ""
+    
 def Scrape(query):
     search = requests.get(Searchbar1 + query + Searchbar2,headers=fakeheader).text
     soup = BeautifulSoup(search,'html.parser')
