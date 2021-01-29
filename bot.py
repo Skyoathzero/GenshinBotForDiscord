@@ -81,7 +81,7 @@ async def on_command_error(ctx, error):
 async def search(ctx,*,isian):
     Scrapeweb.Scrape(isian)
     INFO = discord.Embed(title="Here are your search results",
-                        description="Please pick the number of your search result that you want to access",
+                        description="Please pick the number of your search result that you want to access.\n\n**Number Of Result** : {}".format(Scrapeweb.NO_OF_RESULT),
                         color=0x70d4ff)
     INFO.set_author(name="Paimon",icon_url = "https://upload-os-bbs.mihoyo.com/upload/2020/06/03/6409544/94d2302c0fd450181a6c63d2dfa09687_8638738802068195592.jpg?x-oss-process=image/resize,s_740/quality,q_80/auto-orient,0/interlace,1/format,jpg")
     INFO1 = discord.Embed(title="|| ------------------ ||",url=Scrapeweb.INFO["link1"], description=Scrapeweb.INFO["card_info1"], color=0x70d4ff)

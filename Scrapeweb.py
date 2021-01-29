@@ -76,18 +76,37 @@ def Scrape(query):
 
     #print(noOfRessult[0])
     #print(cardcontainer.get_text())
+    global NO_OF_RESULT
     NO_OF_RESULT = noOfRessult[0].get_text()
     print(NO_OF_RESULT)
     addtodictLINKS(refinedlinks)
     addtodictINFO(cards)
     addtodictIMG(refinedimages)
+isian = "/database/consumable/adeptus-temptation"
+def Articlescrape(isian):
+
+    search = requests.get(linktodatabase+isian).text
+    soup = BeautifulSoup(search,'html.parser')
+    contentclasifiercontainer1 = soup.find("section",attrs={"class":"content"})
+    contentclasifier = contentclasifiercontainer1.find_all("a",attrs={"class":"active"})
+    unrefinedcategories = contentclasifier[1]["href"]
+    if unrefinedcategories == "/database":
+        unrefinedcategories = contentclasifier[2]["href"]
+        categories =(unrefinedcategories.split('/')[-1])
+
+    
+    print(categories)
+    # characterDetailContainer = soup.find("div",attrs={"class": "character-detail"})
+    # characterDetails = soup.find_all()
+    # print(characterDetailContainer.prettify())
 
 
 
-Scrape("pyro")
-# print("")
-# print(INFO["card_info1"])
-# print(INFO["card_info2"])
-print(INFO["image1"])
-print(INFO["link1"])
+# Scrape("pyro")
+# # print("")
+# # print(INFO["card_info1"])
+# # print(INFO["card_info2"])
+# print(INFO["image1"])
+# print(INFO["link1"])
 
+Articlescrape(isian)
