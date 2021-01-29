@@ -83,19 +83,36 @@ def Scrape(query):
     addtodictINFO(cards)
     addtodictIMG(refinedimages)
 isian = "/database/consumable/adeptus-temptation"
+datatest = "/"
 def Articlescrape(isian):
 
     search = requests.get(linktodatabase+isian).text
     soup = BeautifulSoup(search,'html.parser')
-    contentclasifiercontainer1 = soup.find("section",attrs={"class":"content"})
-    contentclasifier = contentclasifiercontainer1.find_all("a",attrs={"class":"active"})
-    unrefinedcategories = contentclasifier[1]["href"]
-    if unrefinedcategories == "/database":
-        unrefinedcategories = contentclasifier[2]["href"]
-        categories =(unrefinedcategories.split('/')[-1])
-
-    
-    print(categories)
+    contentclasifier = isian.split("/")
+    db = "database"
+    if contentclasifier[0] == db :
+        if contentclasifier[1]=="npc":
+            pass
+        if contentclasifier[1]=="quest":
+            pass
+        if contentclasifier[1]=="artifact-set":
+            pass
+        if contentclasifier[1]=="enemies":
+            pass
+        if contentclasifier[1]=="consumable":
+            pass
+        if contentclasifier[1]=="domain":
+            pass
+        if contentclasifier[1]=="book":
+            pass
+        if contentclasifier[1]=="artifact":
+            pass
+        if contentclasifier[1]=="item":
+            pass
+        if contentclasifier[1]=="weapon":
+            pass
+    for i in contentclasifier:
+        print(i)
     # characterDetailContainer = soup.find("div",attrs={"class": "character-detail"})
     # characterDetails = soup.find_all()
     # print(characterDetailContainer.prettify())
