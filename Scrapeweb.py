@@ -87,9 +87,9 @@ isian = "/characters/amber"
 datatest = "/"
 formatres = ""
 
-CHARACTERINFO = {'Name': '','MainIMG':''
-                                        }
-
+CHARACTERINFO = {'Name': '','MainIMG':'',
+                'GeneralInfoList':''}
+        
 
 def Articlescrape(isian):
 
@@ -125,7 +125,9 @@ def Articlescrape(isian):
         name = characterDetails[0].find("h2")
         mainImg = characterDetails[0].find("img",attrs ={"class":"img-fluid"})
         CHARACTERINFO["Name"]= toText(name)
-        CHARACTERINFO["MainIMG"] = mainImg["src"]
+        CHARACTERINFO["MainIMG"] = linktodatabase + mainImg["src"]
+
+
 
     if contentclasifier[1] == "mechanics" :
         pass
