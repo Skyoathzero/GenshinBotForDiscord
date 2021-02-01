@@ -88,7 +88,9 @@ datatest = "/"
 formatres = ""
 
 CHARACTERINFO = {'Name': '','MainIMG':'',
-                'GeneralInfoList':''}
+                'General_Info':'',
+                'Description':'',
+                'Ingame_description':''}
         
 
 def Articlescrape(isian):
@@ -126,9 +128,19 @@ def Articlescrape(isian):
         mainImg = characterDetails[0].find("img",attrs ={"class":"img-fluid"})
         CHARACTERINFO["Name"]= toText(name)
         CHARACTERINFO["MainIMG"] = linktodatabase + mainImg["src"]
+        
+        generalinfoContainer = characterDetails[1].find_all("li")
+        generalInfo = [i.get_text() for i in generalinfoContainer]
+        CHARACTERINFO["General_Info"] = generalInfo
+        
+        descriptionContainer = characterDetails[2].findAll("div",attrs={'class':'card'})
+        description = descriptionContainer[0].find('div',attrs={"class":"card-body"}).get_text()
+        ingameDescription = descriptionContainer[1].find('div',attrs={"class":"card-body"}).get_text()
+        CHARACTERINFO["Description"] = description
+        CHARACTERINFO["Ingame_description"] = ingameDescription
 
-
-
+        loreContainer = find('div',attrs={"id":"characterlore"})
+        lore = loreContainer.re 
     if contentclasifier[1] == "mechanics" :
         pass
     
@@ -144,4 +156,3 @@ def Articlescrape(isian):
 # print(INFO["link1"])
 
 Articlescrape(isian)
-print(CHARACTERINFO["Name"],"\n",CHARACTERINFO["MainIMG"])
