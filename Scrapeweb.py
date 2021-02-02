@@ -139,8 +139,40 @@ def Articlescrape(isian):
         CHARACTERINFO["Description"] = description
         CHARACTERINFO["Ingame_description"] = ingameDescription
 
-        loreContainer = find('div',attrs={"id":"characterlore"})
-        lore = loreContainer.re 
+        loreContainer = characterDetails[4].find('div',attrs={"id":"characterlore"})
+        lore = loreContainer.get_text()
+        pattern1 = re.compile("Character Story 1")
+        pattern2 = re.compile("Character Story 2")
+        pattern3 = re.compile("Character Story 3")
+        pattern4 = re.compile("Character Story 4")
+        pattern5 = re.compile("Character Story 5")
+        splittedLore = ['','','','','']
+        patternContainer = [pattern1,pattern2,pattern3,pattern4,pattern5]
+        num = 0
+        tempLore = lore
+        for pattern in patternContainer:
+            
+            # print(lore[:50])
+            temporaryList = re.split(pattern,tempLore)
+            
+            #details,story
+            splittedLore[num] = temporaryList[0]
+            # print(temporaryList[0][:50])
+            temporaryList.pop(0)
+            tempLore = temporaryList[0]
+            # print(temporaryList[0][:50])
+            temporaryList.clear()
+            num += 1
+        
+        
+        if splittedLore[0] != '':
+            tempList = lambda string : re.split("s",string,maxsplit=1).pop(1)
+            splittedLore[0] = tempList(splittedLore[0])
+            print(splittedLore[0])
+            # splittedLore[0] = tempList(splittedLore[0])
+        # for i in splittedLore:
+        #     print(i)
+        #     print('\n')
     if contentclasifier[1] == "mechanics" :
         pass
     
