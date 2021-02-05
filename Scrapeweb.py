@@ -90,7 +90,8 @@ formatres = ""
 CHARACTERINFO = {'Name': '','MainIMG':'',
                 'General_Info':'',
                 'Description':'',
-                'Ingame_description':''}
+                'Ingame_description':'',
+                'Story':''}
         
 
 def Articlescrape(isian):
@@ -168,7 +169,13 @@ def Articlescrape(isian):
         if splittedLore[0] != '':
             tempList = lambda string : re.split("s",string,maxsplit=1).pop(1)
             splittedLore[0] = tempList(splittedLore[0])
-            print(splittedLore[0])
+        CHARACTERINFO["Story"] = splittedLore
+        skillandConstContainer = characterDetails.find('div',attrs={'class':'tab-content'})
+        talentContainer = skillandConstContainer.find('div',attrs={'id':'skills'})
+        constelationContainer = skillandConstContainer.find('div',attrs={'id':'constellation'})
+        ascensionContainer =  skillandConstContainer.find('div',attrs={'id':'ascension'})
+        statsContainer = skillandConstContainer.find('div',attrs={'id':'stats'})
+        print(characterDetails[6].prettify())
             # splittedLore[0] = tempList(splittedLore[0])
         # for i in splittedLore:
         #     print(i)
