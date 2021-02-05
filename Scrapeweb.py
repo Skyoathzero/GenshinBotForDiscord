@@ -87,11 +87,14 @@ isian = "/characters/amber"
 datatest = "/"
 formatres = ""
 
-CHARACTERINFO = {'Name': '','MainIMG':'',
+CHARACTERINFO = {'Name': '',
+                'MainIMG':'',
                 'General_Info':'',
                 'Description':'',
                 'Ingame_description':'',
-                'Story':''}
+                'Story':'',
+                'Talents':'',
+                'Constelations':''}
         
 
 def Articlescrape(isian):
@@ -170,16 +173,39 @@ def Articlescrape(isian):
             tempList = lambda string : re.split("s",string,maxsplit=1).pop(1)
             splittedLore[0] = tempList(splittedLore[0])
         CHARACTERINFO["Story"] = splittedLore
-        skillandConstContainer = characterDetails.find('div',attrs={'class':'tab-content'})
+        skillandConstContainer = characterDetails[6].find('div',attrs={'class':'tab-content'})
         talentContainer = skillandConstContainer.find('div',attrs={'id':'skills'})
         constelationContainer = skillandConstContainer.find('div',attrs={'id':'constellation'})
         ascensionContainer =  skillandConstContainer.find('div',attrs={'id':'ascension'})
         statsContainer = skillandConstContainer.find('div',attrs={'id':'stats'})
-        print(characterDetails[6].prettify())
-            # splittedLore[0] = tempList(splittedLore[0])
-        # for i in splittedLore:
-        #     print(i)
-        #     print('\n')
+        
+        TALENT_DICT = {}
+        talents = talentContainer.find_all("div",attrs={'class':'row'})
+        for i in talents:
+            talent = i.find('div',attrs='col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-11 col-xxl-11')
+            name = talent.find('h4').get_text()
+            description = talent.find_all("p")
+            description = [x.get_text() for x in description]
+            TALENT_DICT[name] = description
+        CHARACTERINFO["Talents"] = TALENT_DICT
+        keysTalent = list(CHARACTERINFO["Talents"])
+        # for key in keys:
+        #     print(key)
+        #     for i in CHARACTERINFO["Talents"][key]:
+        #         print(i)
+        #IMPORTANT
+        CONSTELATION_DICT = {}
+        constelations = constelationContainer.find_all("div",attrs={'class':'row'})
+        for i in constelations:
+            constelation = i.find('div',attrs='col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-11 col-xxl-11')
+            name = constelation.find('h4').get_text()
+            description = talent.find_all("p")
+            description = [x.get_text() for x in description]
+            CONSTELATION_DICT[name] = description
+            print(i.prettify())
+        CHARACTERINFO["Constelations"] = TALENT_DICT
+        keysConst = list(CHARACTERINFO["Constelations"])
+        
     if contentclasifier[1] == "mechanics" :
         pass
     
