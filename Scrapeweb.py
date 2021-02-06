@@ -86,7 +86,7 @@ def Scrape(query):
 isian = "/characters/amber"
 datatest = "/"
 formatres = ""
-
+CATEGORIES = {"category":""}
 CHARACTERINFO = {'Name': '',
                 'MainIMG':'',
                 'General_Info':'',
@@ -99,32 +99,33 @@ CHARACTERINFO = {'Name': '',
 
 def Articlescrape(isian):
 
-    search = requests.get(linktodatabase+isian).text
+    search = requests.get(isian).text
     soup = BeautifulSoup(search,'html.parser')
     contentclasifier = isian.split("/")
     db = "database"
-    if contentclasifier[1] == db :
-        if contentclasifier[2]=="npc":
+    print(contentclasifier)
+    if contentclasifier[3] == db :
+        if contentclasifier[4]=="npc":
             pass
-        if contentclasifier[2]=="quest":
+        if contentclasifier[4]=="quest":
             pass
-        if contentclasifier[2]=="artifact-set":
+        if contentclasifier[4]=="artifact-set":
             pass
-        if contentclasifier[2]=="enemies":
+        if contentclasifier[4]=="enemies":
             pass
-        if contentclasifier[2]=="consumable":
+        if contentclasifier[4]=="consumable":
             pass
-        if contentclasifier[2]=="domain":
+        if contentclasifier[4]=="domain":
             pass
-        if contentclasifier[2]=="book":
+        if contentclasifier[4]=="book":
             pass
-        if contentclasifier[2]=="artifact":
+        if contentclasifier[4]=="artifact":
             pass
-        if contentclasifier[2]=="item":
+        if contentclasifier[4]=="item":
             pass
-        if contentclasifier[2]=="weapon":
+        if contentclasifier[4]=="weapon":
             pass
-    if contentclasifier[1] == "characters" :
+    if contentclasifier[3] == "characters" :
         characterDetailContainer = soup.find("div",attrs={"class": "character-detail"})
         characterDetails = characterDetailContainer.find_all("div",attrs={"class": "row mb-4"})
         
@@ -202,22 +203,20 @@ def Articlescrape(isian):
             description = talent.find_all("p")
             description = [x.get_text() for x in description]
             CONSTELATION_DICT[name] = description
-            print(i.prettify())
         CHARACTERINFO["Constelations"] = TALENT_DICT
         keysConst = list(CHARACTERINFO["Constelations"])
-        
-    if contentclasifier[1] == "mechanics" :
+        CATEGORIES["category"] = "character"
+    if contentclasifier[3] == "mechanics" :
         pass
     
     
 
-
-
-# Scrape("pyro")
-# # print("")
-# # print(INFO["card_info1"])
-# # print(INFO["card_info2"])
-# print(INFO["image1"])
-# print(INFO["link1"])
-
-Articlescrape(isian)
+# CHARACTERINFO = {'Name': '',
+#                 'MainIMG':'',
+#                 'General_Info':'',
+#                 'Description':'',
+#                 'Ingame_description':'',
+#                 'Story':'',
+#                 'Talents':'',
+#                 'Constelations':''}
+        
