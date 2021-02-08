@@ -79,11 +79,11 @@ def Scrape(query):
     #print(cardcontainer.get_text())
     global NO_OF_RESULT
     NO_OF_RESULT = noOfRessult[0].get_text()
-    print(NO_OF_RESULT)
+    
     addtodictLINKS(refinedlinks)
     addtodictINFO(cards)
     addtodictIMG(refinedimages)
-isian = "/characters/amber"
+isian = "https://www.gensh.in/characters/amberr"
 datatest = "/"
 formatres = ""
 CATEGORIES = {"category":""}
@@ -103,7 +103,6 @@ def Articlescrape(isian):
     soup = BeautifulSoup(search,'html.parser')
     contentclasifier = isian.split("/")
     db = "database"
-    print(contentclasifier)
     if contentclasifier[3] == db :
         if contentclasifier[4]=="npc":
             pass
@@ -190,20 +189,19 @@ def Articlescrape(isian):
             TALENT_DICT[name] = description
         CHARACTERINFO["Talents"] = TALENT_DICT
         keysTalent = list(CHARACTERINFO["Talents"])
-        # for key in keys:
-        #     print(key)
-        #     for i in CHARACTERINFO["Talents"][key]:
-        #         print(i)
         #IMPORTANT
         CONSTELATION_DICT = {}
         constelations = constelationContainer.find_all("div",attrs={'class':'row'})
         for i in constelations:
             constelation = i.find('div',attrs='col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xl-11 col-xxl-11')
             name = constelation.find('h4').get_text()
-            description = talent.find_all("p")
+            print(name)
+            description = constelation.find_all("p")
+            print(description)
             description = [x.get_text() for x in description]
+            for i in description: print(i)
             CONSTELATION_DICT[name] = description
-        CHARACTERINFO["Constelations"] = TALENT_DICT
+        CHARACTERINFO["Constelations"] = CONSTELATION_DICT
         keysConst = list(CHARACTERINFO["Constelations"])
         CATEGORIES["category"] = "character"
     if contentclasifier[3] == "mechanics" :
@@ -219,4 +217,5 @@ def Articlescrape(isian):
 #                 'Story':'',
 #                 'Talents':'',
 #                 'Constelations':''}
-        
+Articlescrape("https://www.gensh.in/characters/amber")
+

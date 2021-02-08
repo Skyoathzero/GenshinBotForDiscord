@@ -4,10 +4,12 @@ import logging
 from pathlib import Path
 import json
 from discord.embeds import Embed
-import Scrapeweb
-from Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape
-from Scrapeweb import INFO as informantion
+# import Scrapeweb
+# from Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape
+# from Scrapeweb import INFO as informantion
 import asyncio
+import os
+
 
 cwd = Path(__file__).parents[0]
 cwd = str(cwd)
@@ -24,6 +26,18 @@ async def on_ready():
     await bot.change_presence(activity=discord.Game(name=f"use g! to use my command"))
 
 #Test Command
+for filename in os.listdir('./Cogs'):
+    if filename.endswith('.py'):
+        bot.load_extension(f'Cogs.{filename[:-3]}')
+    else: pass
+
+@bot.command()
+async def load(ctx,extension):
+    bot.load_extension(f'Cogs.{extension}')
+
+@bot.command()
+async def unload(ctx,extension):
+    bot.unload_extension(f'Cogs.{extension}')
 
 @bot.command(name = "hi",aliases =['hello'])
 async def _hi(ctx):
@@ -79,129 +93,131 @@ async def on_command_error(ctx, error):
 
 
 
+
+
 #Scrape web command
-@bot.command(name = 'search',aliases = ['s','srch'])
-async def search(ctx,*,isian):
-    Scrapeweb.Scrape(isian)
-    INFO = discord.Embed(title="Here are your search results",
-                        description="Please pick the number of your search result that you want to access.\n\n**Number Of Result** : {}".format(Scrapeweb.NO_OF_RESULT),
-                        color=0x70d4ff)
-    INFO.set_author(name="Paimon",icon_url = "https://upload-os-bbs.mihoyo.com/upload/2020/06/03/6409544/94d2302c0fd450181a6c63d2dfa09687_8638738802068195592.jpg?x-oss-process=image/resize,s_740/quality,q_80/auto-orient,0/interlace,1/format,jpg")
-    INFO1 = discord.Embed(title="|| ------------------ ||",url=Scrapeweb.INFO["link1"], description=Scrapeweb.INFO["card_info1"], color=0x70d4ff)
-    INFO1.set_author(name="Search Result 1")
-    INFO1.set_thumbnail(url=Scrapeweb.INFO["image1"])
-    INFO2 = discord.Embed(title="|| ------------------ ||",url=Scrapeweb.INFO["link2"], description=Scrapeweb.INFO["card_info2"], color=0x70d4ff)
-    INFO2.set_author(name="Search Result 2")
-    INFO2.set_thumbnail(url=Scrapeweb.INFO["image2"])
-    INFO3 = discord.Embed(title="|| ------------------ ||",url=Scrapeweb.INFO["link3"], description=Scrapeweb.INFO["card_info3"],color=0x70d4ff)
-    INFO3.set_author(name="Search Result 3")
-    INFO3.set_thumbnail(url=Scrapeweb.INFO["image3"])
-    INFO4 = discord.Embed(title="|| ------------------ ||",url=Scrapeweb.INFO["link4"], description=Scrapeweb.INFO["card_info4"], color=0x70d4ff)
-    INFO4.set_author(name="Search Result 4")
-    INFO4.set_thumbnail(url=Scrapeweb.INFO["image4"])
-    await ctx.send(embed=INFO)
-    sent = []
-    if Scrapeweb.INFO["card_info1"] != "":
-        await ctx.send(embed=INFO1)
-        sent.append('1')
-        if Scrapeweb.INFO["card_info2"] != "":
-            await ctx.send(embed=INFO2)
-            sent.append('2')
-            if Scrapeweb.INFO["card_info3"] != "":
-                await ctx.send(embed=INFO3)
-                sent.append('3')
-                if Scrapeweb.INFO["card_info4"] != "":
-                    await ctx.send(embed=INFO4)
-                    sent.append('4')
-        # try : 
-        selection = await bot.wait_for(
-        'message',
-        timeout=60,
-        check=lambda message: message.author == ctx.author
-        )
-        print(selection)
-        if selection.content == "1":
-            print("scraping")
-            Articlescrape(informantion["link1"])
-            if CATEGORIES['category'] == 'character':
+# @bot.command(name = 'search',aliases = ['s','srch'])
+# async def search(ctx,*,isian):
+#     Scrapeweb.Scrape(isian)
+#     INFO = discord.Embed(title="Here are your search results",
+#                         description="Please pick the number of your search result that you want to access.\n\n**Number Of Result** : {}".format(Scrapeweb.NO_OF_RESULT),
+#                         color=0x70d4ff)
+#     INFO.set_author(name="Paimon",icon_url = "https://upload-os-bbs.mihoyo.com/upload/2020/06/03/6409544/94d2302c0fd450181a6c63d2dfa09687_8638738802068195592.jpg?x-oss-process=image/resize,s_740/quality,q_80/auto-orient,0/interlace,1/format,jpg")
+#     INFO1 = discord.Embed(title="|| ------------------ ||",url=Scrapeweb.INFO["link1"], description=Scrapeweb.INFO["card_info1"], color=0x70d4ff)
+#     INFO1.set_author(name="Search Result 1")
+#     INFO1.set_thumbnail(url=Scrapeweb.INFO["image1"])
+#     INFO2 = discord.Embed(title="|| ------------------ ||",url=Scrapeweb.INFO["link2"], description=Scrapeweb.INFO["card_info2"], color=0x70d4ff)
+#     INFO2.set_author(name="Search Result 2")
+#     INFO2.set_thumbnail(url=Scrapeweb.INFO["image2"])
+#     INFO3 = discord.Embed(title="|| ------------------ ||",url=Scrapeweb.INFO["link3"], description=Scrapeweb.INFO["card_info3"],color=0x70d4ff)
+#     INFO3.set_author(name="Search Result 3")
+#     INFO3.set_thumbnail(url=Scrapeweb.INFO["image3"])
+#     INFO4 = discord.Embed(title="|| ------------------ ||",url=Scrapeweb.INFO["link4"], description=Scrapeweb.INFO["card_info4"], color=0x70d4ff)
+#     INFO4.set_author(name="Search Result 4")
+#     INFO4.set_thumbnail(url=Scrapeweb.INFO["image4"])
+#     await ctx.send(embed=INFO)
+#     sent = []
+#     if Scrapeweb.INFO["card_info1"] != "":
+#         await ctx.send(embed=INFO1)
+#         sent.append('1')
+#         if Scrapeweb.INFO["card_info2"] != "":
+#             await ctx.send(embed=INFO2)
+#             sent.append('2')
+#             if Scrapeweb.INFO["card_info3"] != "":
+#                 await ctx.send(embed=INFO3)
+#                 sent.append('3')
+#                 if Scrapeweb.INFO["card_info4"] != "":
+#                     await ctx.send(embed=INFO4)
+#                     sent.append('4')
+#         # try : 
+#         selection = await bot.wait_for(
+#         'message',
+#         timeout=60,
+#         check=lambda message: message.author == ctx.author
+#         )
+#         print(selection)
+#         if selection.content == "1"and selection.content in sent:
+#             print("scraping")
+#             Articlescrape(informantion["link1"])
+#             if CATEGORIES['category'] == 'character':
 
 
-                content = CHARACTERINFO
-                Nama = content["Name"]
-                Img = Scrapeweb.INFO["image1"]
-                tempList = content["General_Info"]
-                separator = "\n"
-                generalinfo= separator.join(tempList)
-                description = content["Description"]
-                ingameDescription = content["Ingame_description"]
-                embed=discord.Embed(title="--------General info--------", description=generalinfo)
-                embed.set_author(name="-----"+Nama+"-----")
-                embed.set_thumbnail(url=Img)
-                embed.add_field(name="Description", value=description, inline=False)
-                embed.add_field(name="Ingame Description", value=ingameDescription, inline=False)
-                await ctx.send(embed=embed)
-        if selection.content == "2":
-            print("scraping")
-            Articlescrape(informantion["link2"])
-            if CATEGORIES['category'] == 'character':
+#                 content = CHARACTERINFO
+#                 Nama = content["Name"]
+#                 Img = Scrapeweb.INFO["image1"]
+#                 tempList = content["General_Info"]
+#                 separator = "\n"
+#                 generalinfo= separator.join(tempList)
+#                 description = content["Description"]
+#                 ingameDescription = content["Ingame_description"]
+#                 embed=discord.Embed(title="--------General info--------", description=generalinfo)
+#                 embed.set_author(name="-----"+Nama+"-----")
+#                 embed.set_thumbnail(url=Img)
+#                 embed.add_field(name="Description", value=description, inline=False)
+#                 embed.add_field(name="Ingame Description", value=ingameDescription, inline=False)
+#                 await ctx.send(embed=embed)
+#         if selection.content == "2" and selection.content in sent:
+#             print("scraping")
+#             Articlescrape(informantion["link2"])
+#             if CATEGORIES['category'] == 'character':
 
 
-                content = CHARACTERINFO
-                Nama = content["Name"]
-                Img = Scrapeweb.INFO["image2"]
-                tempList = content["General_Info"]
-                separator = "\n"
-                generalinfo= separator.join(tempList)
-                description = content["Description"]
-                ingameDescription = content["Ingame_description"]
-                embed=discord.Embed(title="--------General info--------", description=generalinfo)
-                embed.set_author(name="-----"+Nama+"-----")
-                embed.set_thumbnail(url=Img)
-                embed.add_field(name="Description", value=description, inline=False)
-                embed.add_field(name="Ingame Description", value=ingameDescription, inline=False)
-                await ctx.send(embed=embed)
-        if selection.content == "3":
-            print("scraping")
-            Articlescrape(informantion["link3"])
-            print()
-            if CATEGORIES['category'] == 'character':
+#                 content = CHARACTERINFO
+#                 Nama = content["Name"]
+#                 Img = Scrapeweb.INFO["image2"]
+#                 tempList = content["General_Info"]
+#                 separator = "\n"
+#                 generalinfo= separator.join(tempList)
+#                 description = content["Description"]
+#                 ingameDescription = content["Ingame_description"]
+#                 embed=discord.Embed(title="--------General info--------", description=generalinfo)
+#                 embed.set_author(name="-----"+Nama+"-----")
+#                 embed.set_thumbnail(url=Img)
+#                 embed.add_field(name="Description", value=description, inline=False)
+#                 embed.add_field(name="Ingame Description", value=ingameDescription, inline=False)
+#                 await ctx.send(embed=embed)
+#         if selection.content == "3"and selection.content in sent:
+#             print("scraping")
+#             Articlescrape(informantion["link3"])
+#             print()
+#             if CATEGORIES['category'] == 'character':
 
-                content = CHARACTERINFO
-                Nama = content["Name"]
-                Img = Scrapeweb.INFO["image3"]
-                tempList = content["General_Info"]
-                separator = "\n"
-                generalinfo= separator.join(tempList)
-                description = content["Description"]
-                ingameDescription = content["Ingame_description"]
-                embed=discord.Embed(title="--------General info--------", description=generalinfo)
-                embed.set_author(name="-----"+Nama+"-----")
-                embed.set_thumbnail(url=Img)
-                embed.add_field(name="Description", value=description, inline=False)
-                embed.add_field(name="Ingame Description", value=ingameDescription, inline=False)
-                await ctx.send(embed=embed)
-            else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
-        if selection.content == "4":
-            print("scraping")
-            Articlescrape(informantion["link4"])
-            if CATEGORIES['category'] == 'character':
+#                 content = CHARACTERINFO
+#                 Nama = content["Name"]
+#                 Img = Scrapeweb.INFO["image3"]
+#                 tempList = content["General_Info"]
+#                 separator = "\n"
+#                 generalinfo= separator.join(tempList)
+#                 description = content["Description"]
+#                 ingameDescription = content["Ingame_description"]
+#                 embed=discord.Embed(title="--------General info--------", description=generalinfo)
+#                 embed.set_author(name="-----"+Nama+"-----")
+#                 embed.set_thumbnail(url=Img)
+#                 embed.add_field(name="Description", value=description, inline=False)
+#                 embed.add_field(name="Ingame Description", value=ingameDescription, inline=False)
+#                 await ctx.send(embed=embed)
+#             else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
+#         if selection.content == "4"and selection.content in sent:
+#             print("scraping")
+#             Articlescrape(informantion["link4"])
+#             if CATEGORIES['category'] == 'character':
 
-                content = CHARACTERINFO
-                Nama = content["Name"]
-                Img = Scrapeweb.INFO["image4"]
-                tempList = content["General_Info"]
-                separator = "\n"
-                generalinfo= separator.join(tempList)
-                description = content["Description"]
-                ingameDescription = content["Ingame_description"]
-                embed=discord.Embed(title="--------General info--------", description=generalinfo)
-                embed.set_author(name="-----"+Nama+"-----")
-                embed.set_thumbnail(url=Img)
-                embed.add_field(name="Description", value=description, inline=False)
-                embed.add_field(name="Ingame Description", value=ingameDescription, inline=False)
-                await ctx.send(embed=embed)
-        # except asyncio.TimeoutError():
-        else : print("failed") 
-    else: await ctx.send("Sorry, No Result is Found :<")
+#                 content = CHARACTERINFO
+#                 Nama = content["Name"]
+#                 Img = Scrapeweb.INFO["image4"]
+#                 tempList = content["General_Info"]
+#                 separator = "\n"
+#                 generalinfo= separator.join(tempList)
+#                 description = content["Description"]
+#                 ingameDescription = content["Ingame_description"]
+#                 embed=discord.Embed(title="--------General info--------", description=generalinfo)
+#                 embed.set_author(name="-----"+Nama+"-----")
+#                 embed.set_thumbnail(url=Img)
+#                 embed.add_field(name="Description", value=description, inline=False)
+#                 embed.add_field(name="Ingame Description", value=ingameDescription, inline=False)
+#                 await ctx.send(embed=embed)
+#         # except asyncio.TimeoutError():
+#         else : print("failed") 
+#     else: await ctx.send("Sorry, No Result is Found :<")
     
 bot.run("NzYyNTIwODUyMzg2MTUyNDc4.X3qW4g.fKD4mSCJL1dWeIf1lvov2CgVAko")  
