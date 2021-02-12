@@ -1,10 +1,11 @@
 import discord
 from discord.ext import commands
 from disputils import BotEmbedPaginator, BotConfirmation, BotMultipleChoice
-from module import Scrapeweb
-from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape
-from module.Scrapeweb import INFO as informantion
-
+try:
+    from module import Scrapeweb
+    from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape
+    from module.Scrapeweb import INFO as informantion
+except : pass
 class search(commands.Cog):
     def __init__(self,client):
         self.client = client

@@ -123,7 +123,12 @@ def Articlescrape(isian):
         if contentclasifier[4]=="item":
             pass
         if contentclasifier[4]=="weapon":
-            pass
+            WeaponDlCr1 = soup.find_all('div',attrs={'class':'row mb-4'})
+            WeaponDlCr2 = soup.find('div',attrs={'class':'row'}) 
+            WeaponDetailContainer1 = WeaponDlCr1[0]
+            WeaponDetailContainer2 = WeaponDlCr2
+            WeaponDetailContainer3 = WeaponDlCr1[1]
+            print(WeaponDetailContainer1.prettify(),"\n",WeaponDetailContainer2.prettify(),"\n",WeaponDetailContainer3.prettify())
     if contentclasifier[3] == "characters" :
         characterDetailContainer = soup.find("div",attrs={"class": "character-detail"})
         characterDetails = characterDetailContainer.find_all("div",attrs={"class": "row mb-4"})
@@ -217,5 +222,5 @@ def Articlescrape(isian):
 #                 'Story':'',
 #                 'Talents':'',
 #                 'Constelations':''}
-Articlescrape("https://www.gensh.in/characters/amber")
+Articlescrape("https://www.gensh.in/database/weapon/aquila-favonia")
 
