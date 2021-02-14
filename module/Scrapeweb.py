@@ -95,7 +95,12 @@ CHARACTERINFO = {'Name': '',
                 'Story':'',
                 'Talents':'',
                 'Constelations':''}
-        
+WEAPONINFO = {"Name":"",
+            "Img":"",
+            "Info":"",
+            "Lore":"",
+            "Ability":"",
+            }
 
 def Articlescrape(isian):
 
@@ -123,12 +128,44 @@ def Articlescrape(isian):
         if contentclasifier[4]=="item":
             pass
         if contentclasifier[4]=="weapon":
+
             WeaponDlCr1 = soup.find_all('div',attrs={'class':'row mb-4'})
-            WeaponDlCr2 = soup.find('div',attrs={'class':'row'}) 
+            WeaponDlCr2 = soup.find('section',attrs={'class':'content'}) 
             WeaponDetailContainer1 = WeaponDlCr1[0]
-            WeaponDetailContainer2 = WeaponDlCr2
-            WeaponDetailContainer3 = WeaponDlCr1[1]
-            print(WeaponDetailContainer1.prettify(),"\n",WeaponDetailContainer2.prettify(),"\n",WeaponDetailContainer3.prettify())
+            WeaponDetailContainer2 = WeaponDlCr2.select("section > div")[1]
+            WeaponDetailContainer3 = WeaponDlCr1[1] 
+
+            Name = WeaponDetailContainer1.find("h2")
+            Name = Name.get_text()
+
+            Imagecontainer = WeaponDetailContainer1.find("img")
+            Image = Imagecontainer["src"]
+            
+            infocontainer = WeaponDetailContainer1.find("ul") 
+            info = infocontainer.find_all("li")
+            newinfo = [i.get_text() for i in info]
+            separator = "\n"
+            info = separator.join(newinfo)
+
+            lorecontainer = WeaponDetailContainer2.find("div",attrs={"class":"card-body"})
+            lore = lorecontainer.find_all("p")
+            newlore = [i.get_text() for i in lore]
+            newlore = separator.join(newlore)
+            
+
+            abilitiescontainer = WeaponDetailContainer2.find("div",attrs={"class":"col-sm-12 col-lg-5 mb-4"})
+            abilityname = abilitiescontainer.find("p")
+            abilitydescription = abilitiescontainer.find("li")
+            abilityname = abilityname.get_text()
+            abilitydescription = abilitydescription.get_text()
+            
+            WEAPONINFO["Name"] = Name
+            WEAPONINFO["Img"] = Image
+            WEAPONINFO["Info"] = info
+            WEAPONINFO["Lore"] = newlore
+            WEAPONINFO["Ability"] = list((abilityname,abilitydescription))
+
+            print(WEAPONINFO)
     if contentclasifier[3] == "characters" :
         characterDetailContainer = soup.find("div",attrs={"class": "character-detail"})
         characterDetails = characterDetailContainer.find_all("div",attrs={"class": "row mb-4"})
@@ -142,7 +179,7 @@ def Articlescrape(isian):
         generalInfo = [i.get_text() for i in generalinfoContainer]
         CHARACTERINFO["General_Info"] = generalInfo
         
-        descriptionContainer = characterDetails[2].findAll("div",attrs={'class':'card'})
+        descriptionContainer = characterDetails[2].find_all("div",attrs={'class':'card'})
         description = descriptionContainer[0].find('div',attrs={"class":"card-body"}).get_text()
         ingameDescription = descriptionContainer[1].find('div',attrs={"class":"card-body"}).get_text()
         CHARACTERINFO["Description"] = description
