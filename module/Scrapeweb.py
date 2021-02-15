@@ -164,7 +164,7 @@ def Articlescrape(isian):
             WEAPONINFO["Info"] = info
             WEAPONINFO["Lore"] = newlore
             WEAPONINFO["Ability"] = list((abilityname,abilitydescription))
-
+            CATEGORIES["category"] = "weapons"
             print(WEAPONINFO)
     if contentclasifier[3] == "characters" :
         characterDetailContainer = soup.find("div",attrs={"class": "character-detail"})

@@ -3,7 +3,7 @@ from discord.ext import commands
 from disputils import BotEmbedPaginator, BotConfirmation, BotMultipleChoice
 try:
     from module import Scrapeweb
-    from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape
+    from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape,WEAPONINFO
     from module.Scrapeweb import INFO as informantion
 except : pass
 class search(commands.Cog):
@@ -55,6 +55,7 @@ class search(commands.Cog):
                 print("scraping")
                 Articlescrape(informantion["link1"])
                 if CATEGORIES['category'] == 'character':
+                
                     content = CHARACTERINFO
                     Nama = content["Name"]
                     Img = Scrapeweb.INFO["image1"]
@@ -84,6 +85,22 @@ class search(commands.Cog):
                         character3.add_field(name=key, value=separator.join(constDesc), inline=False)
                     EmbedList = [character1,character2,character3]
                     paginator = BotEmbedPaginator(ctx, EmbedList)
+                    await paginator.run()
+                if CATEGORIES['category'] == 'weapons':
+                    Wname       = WEAPONINFO["Name"]
+                    Wimg        = WEAPONINFO["Img"]
+                    Winfo       = WEAPONINFO["Info"]
+                    Wlore       = WEAPONINFO["Lore"]
+                    WabilityT   = WEAPONINFO["Ability"][0]
+                    WabilityC   = WEAPONINFO["Ability"][1]
+                    Weapon1 = discord.Embed(title="---------------",description=Winfo)
+                    Weapon1.set_author(name=Wname)
+                    Weapon1.add_field(name=WabilityT, value=WabilityC ,inline=False)
+                    Weapon1.set_image(url="https://www.gensh.in"+Wimg)
+                    Weapon2 =discord.Embed(title="---------------", description=Wlore)
+                    Weapon2.set_author(name="Lore")
+                    listofembed = [Weapon1,Weapon2]
+                    paginator = BotEmbedPaginator(ctx, listofembed)
                     await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "2" and selection.content in sent:
@@ -119,6 +136,22 @@ class search(commands.Cog):
                         character3.add_field(name=key, value=separator.join(constDesc), inline=False)
                     EmbedList = [character1,character2,character3]
                     paginator = BotEmbedPaginator(ctx, EmbedList)
+                    await paginator.run()
+                if CATEGORIES['category'] == 'weapons':
+                    Wname       = WEAPONINFO["Name"]
+                    Wimg        = WEAPONINFO["Img"]
+                    Winfo       = WEAPONINFO["Info"]
+                    Wlore       = WEAPONINFO["Lore"]
+                    WabilityT   = WEAPONINFO["Ability"][0]
+                    WabilityC   = WEAPONINFO["Ability"][1]
+                    Weapon1 = discord.Embed(title="---------------",description=Winfo)
+                    Weapon1.set_author(name=Wname)
+                    Weapon1.add_field(name=WabilityT, value=WabilityC ,inline=False)
+                    Weapon1.set_image(url="https://www.gensh.in"+Wimg)
+                    Weapon2 =discord.Embed(title="---------------", description=Wlore)
+                    Weapon2.set_author(name="Lore")
+                    listofembed = [Weapon1,Weapon2]
+                    paginator = BotEmbedPaginator(ctx, listofembed)
                     await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "3"and selection.content in sent:
@@ -157,6 +190,22 @@ class search(commands.Cog):
                     EmbedList = [character1,character2,character3]
                     paginator = BotEmbedPaginator(ctx, EmbedList)
                     await paginator.run()
+                if CATEGORIES['category'] == 'weapons':
+                    Wname       = WEAPONINFO["Name"]
+                    Wimg        = WEAPONINFO["Img"]
+                    Winfo       = WEAPONINFO["Info"]
+                    Wlore       = WEAPONINFO["Lore"]
+                    WabilityT   = WEAPONINFO["Ability"][0]
+                    WabilityC   = WEAPONINFO["Ability"][1]
+                    Weapon1 = discord.Embed(title="---------------",description=Winfo)
+                    Weapon1.set_author(name=Wname)
+                    Weapon1.add_field(name=WabilityT, value=WabilityC ,inline=False)
+                    Weapon1.set_image(url="https://www.gensh.in"+Wimg)
+                    Weapon2 =discord.Embed(title="---------------", description=Wlore)
+                    Weapon2.set_author(name="Lore")
+                    listofembed = [Weapon1,Weapon2]
+                    paginator = BotEmbedPaginator(ctx, listofembed)
+                    await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "4"and selection.content in sent:
                 print("scraping")
@@ -194,6 +243,22 @@ class search(commands.Cog):
                         character3.add_field(name=key, value=separator.join(constDesc), inline=False)
                     EmbedList = [character1,character2,character3]
                     paginator = BotEmbedPaginator(ctx, EmbedList)
+                    await paginator.run()
+                if CATEGORIES['category'] == 'weapons':
+                    Wname       = WEAPONINFO["Name"]
+                    Wimg        = WEAPONINFO["Img"]
+                    Winfo       = WEAPONINFO["Info"]
+                    Wlore       = WEAPONINFO["Lore"]
+                    WabilityT   = WEAPONINFO["Ability"][0]
+                    WabilityC   = WEAPONINFO["Ability"][1]
+                    Weapon1 = discord.Embed(title="---------------",description=Winfo)
+                    Weapon1.set_author(name=Wname)
+                    Weapon1.add_field(name=WabilityT, value=WabilityC ,inline=False)
+                    Weapon1.set_image(url="https://www.gensh.in"+Wimg)
+                    Weapon2 =discord.Embed(title="---------------", description=Wlore)
+                    Weapon2.set_author(name="Lore")
+                    listofembed = [Weapon1,Weapon2]
+                    paginator = BotEmbedPaginator(ctx, listofembed)
                     await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             # except asyncio.TimeoutError():
