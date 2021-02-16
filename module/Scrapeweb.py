@@ -101,7 +101,13 @@ WEAPONINFO = {"Name":"",
             "Lore":"",
             "Ability":"",
             }
-
+ITEMINFO = {"Name":"",
+            "Img":"",
+            "Info":""}
+ENEMIESINFO = {"Name": "",
+                "Img":"",
+                "Drops":""
+                }   
 def Articlescrape(isian):
 
     search = requests.get(isian).text
@@ -116,7 +122,18 @@ def Articlescrape(isian):
         if contentclasifier[4]=="artifact-set":
             pass
         if contentclasifier[4]=="enemies":
-            pass
+            enemiescontainer = soup.find_all("div",attrs={"class":"row mb-4"})
+            container1 = enemiescontainer[0]
+            container2 = enemiescontainer[1]
+            Name = container1.find("h2")
+            
+            infocontainer = container1.find('ul')
+            info = infocontainer.find_all("li")
+            info = [i.get_text() for i in info ]
+            separator = "\n"
+            info = separator.join(info)
+
+
         if contentclasifier[4]=="consumable":
             pass
         if contentclasifier[4]=="domain":
@@ -126,7 +143,22 @@ def Articlescrape(isian):
         if contentclasifier[4]=="artifact":
             pass
         if contentclasifier[4]=="item":
-            pass
+            itemcontainer = soup.find("div",attrs={"class":"row mb-4"})
+            Name = itemcontainer.find("h2")
+            infocontainer = itemcontainer.find("ul")
+            separator = '\n'
+            info = infocontainer.find_all("li")
+            info = [i.get_text() for i in info]
+            info = separator.join(info)
+            Imagecontainer = itemcontainer.find("div",attrs={"class":"col-sm-12 col-md-3 text-center"}) 
+            Image = Imagecontainer.find("img")
+            Image = Image["src"]
+            ITEMINFO["Name"] = Name.get_text()
+            ITEMINFO["Img"] = Image 
+            ITEMINFO["Info"] = info
+            CATEGORIES["category"] = "item"
+
+            print(ITEMINFO)
         if contentclasifier[4]=="weapon":
 
             WeaponDlCr1 = soup.find_all('div',attrs={'class':'row mb-4'})
@@ -259,5 +291,5 @@ def Articlescrape(isian):
 #                 'Story':'',
 #                 'Talents':'',
 #                 'Constelations':''}
-Articlescrape("https://www.gensh.in/database/weapon/aquila-favonia")
+Articlescrape("https://www.gensh.in/database/item/almond")
 

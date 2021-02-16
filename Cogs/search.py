@@ -3,7 +3,7 @@ from discord.ext import commands
 from disputils import BotEmbedPaginator, BotConfirmation, BotMultipleChoice
 try:
     from module import Scrapeweb
-    from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape,WEAPONINFO
+    from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape,WEAPONINFO,ITEMINFO
     from module.Scrapeweb import INFO as informantion
 except : pass
 class search(commands.Cog):
@@ -102,6 +102,15 @@ class search(commands.Cog):
                     listofembed = [Weapon1,Weapon2]
                     paginator = BotEmbedPaginator(ctx, listofembed)
                     await paginator.run()
+                if CATEGORIES['category'] == 'item':
+                    name = "*"+ITEMINFO["Name"]+"*"
+                    Info = ITEMINFO["Info"]
+                    Img = ITEMINFO["Img"]
+                    embed=discord.Embed(title="----------------")
+                    embed.set_author(name=name)
+                    embed.add_field(name="Item Info", value=Info, inline=False)
+                    embed.set_image(url="https://www.gensh.in/"+Img)
+                    await ctx.send(embed=embed)
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "2" and selection.content in sent:
                 print("scraping")
@@ -153,6 +162,15 @@ class search(commands.Cog):
                     listofembed = [Weapon1,Weapon2]
                     paginator = BotEmbedPaginator(ctx, listofembed)
                     await paginator.run()
+                if CATEGORIES['category'] == 'item':
+                    name = "*"+ITEMINFO["Name"]+"*"
+                    Info = ITEMINFO["Info"]
+                    Img = ITEMINFO["Img"]
+                    embed=discord.Embed(title="----------------")
+                    embed.set_author(name=name)
+                    embed.add_field(name="Item Info", value=Info, inline=False)
+                    embed.set_image(url="https://www.gensh.in/"+Img)
+                    await ctx.send(embed=embed)
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "3"and selection.content in sent:
                 print("scraping")
@@ -206,6 +224,15 @@ class search(commands.Cog):
                     listofembed = [Weapon1,Weapon2]
                     paginator = BotEmbedPaginator(ctx, listofembed)
                     await paginator.run()
+                if CATEGORIES['category'] == 'item':
+                    name = "*"+ITEMINFO["Name"]+"*"
+                    Info = ITEMINFO["Info"]
+                    Img = ITEMINFO["Img"]
+                    embed=discord.Embed(title="----------------")
+                    embed.set_author(name=name)
+                    embed.add_field(name="Item Info", value=Info, inline=False)
+                    embed.set_image(url="https://www.gensh.in/"+Img)
+                    await ctx.send(embed=embed)
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "4"and selection.content in sent:
                 print("scraping")
@@ -260,6 +287,15 @@ class search(commands.Cog):
                     listofembed = [Weapon1,Weapon2]
                     paginator = BotEmbedPaginator(ctx, listofembed)
                     await paginator.run()
+                if CATEGORIES['category'] == 'item':
+                    name = "*"+ITEMINFO["Name"]+"*"
+                    Info = ITEMINFO["Info"]
+                    Img = ITEMINFO["Img"]
+                    embed=discord.Embed(title="----------------")
+                    embed.set_author(name=name)
+                    embed.add_field(name="Item Info", value=Info, inline=False)
+                    embed.set_image(url="https://www.gensh.in/"+Img)
+                    await ctx.send(embed=embed)
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             # except asyncio.TimeoutError():
             else : print("failed") 
