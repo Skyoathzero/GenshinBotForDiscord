@@ -3,7 +3,7 @@ from discord.ext import commands
 from disputils import BotEmbedPaginator, BotConfirmation, BotMultipleChoice
 try:
     from module import Scrapeweb
-    from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape,WEAPONINFO,ITEMINFO
+    from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape,WEAPONINFO,ITEMINFO,ENEMIESINFO
     from module.Scrapeweb import INFO as informantion
 except : pass
 class search(commands.Cog):
@@ -111,6 +111,20 @@ class search(commands.Cog):
                     embed.add_field(name="Item Info", value=Info, inline=False)
                     embed.set_image(url="https://www.gensh.in/"+Img)
                     await ctx.send(embed=embed)
+                if CATEGORIES['category'] == 'enemies':
+                    name = "*"+ENEMIESINFO["Name"].get_text()+"*"
+                    img = "https://www.gensh.in/"+ENEMIESINFO["Img"]
+                    info = ENEMIESINFO["Info"]
+                    drops = ENEMIESINFO["Drops"]
+                    desc = ENEMIESINFO["Description"]
+                    page1 = discord.Embed(title="----------------------", description=info)
+                    page1.set_author(name=name)
+                    page1.set_image(url=img)
+                    page2 = discord.Embed(title="----------------------",description=desc )
+                    page2.add_field(name="Drops", value=drops, inline=False)
+                    embedlist = [page1,page2]
+                    paginator =  BotEmbedPaginator(ctx, embedlist)
+                    await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "2" and selection.content in sent:
                 print("scraping")
@@ -171,7 +185,22 @@ class search(commands.Cog):
                     embed.add_field(name="Item Info", value=Info, inline=False)
                     embed.set_image(url="https://www.gensh.in/"+Img)
                     await ctx.send(embed=embed)
+                if CATEGORIES['category'] == 'enemies':
+                    name = "*"+ENEMIESINFO["Name"].get_text()+"*"
+                    img = "https://www.gensh.in/"+ENEMIESINFO["Img"]
+                    info = ENEMIESINFO["Info"]
+                    drops = ENEMIESINFO["Drops"]
+                    desc = ENEMIESINFO["Description"]
+                    page1 = discord.Embed(title="----------------------", description=info)
+                    page1.set_author(name=name)
+                    page1.set_image(url=img)
+                    page2 = discord.Embed(title="----------------------",description=desc )
+                    page2.add_field(name="Drops", value=drops, inline=False)
+                    embedlist = [page1,page2]
+                    paginator =  BotEmbedPaginator(ctx, embedlist)
+                    await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
+                
             if selection.content == "3"and selection.content in sent:
                 print("scraping")
                 Articlescrape(informantion["link3"])
@@ -233,6 +262,20 @@ class search(commands.Cog):
                     embed.add_field(name="Item Info", value=Info, inline=False)
                     embed.set_image(url="https://www.gensh.in/"+Img)
                     await ctx.send(embed=embed)
+                if CATEGORIES['category'] == 'enemies':
+                    name = "*"+ENEMIESINFO["Name"].get_text()+"*"
+                    img = "https://www.gensh.in/"+ENEMIESINFO["Img"]
+                    info = ENEMIESINFO["Info"]
+                    drops = ENEMIESINFO["Drops"]
+                    desc = ENEMIESINFO["Description"]
+                    page1 = discord.Embed(title="----------------------", description=info)
+                    page1.set_author(name=name)
+                    page1.set_image(url=img)
+                    page2 = discord.Embed(title="----------------------",description=desc )
+                    page2.add_field(name="Drops", value=drops, inline=False)
+                    embedlist = [page1,page2]
+                    paginator =  BotEmbedPaginator(ctx, embedlist)
+                    await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "4"and selection.content in sent:
                 print("scraping")
@@ -296,6 +339,20 @@ class search(commands.Cog):
                     embed.add_field(name="Item Info", value=Info, inline=False)
                     embed.set_image(url="https://www.gensh.in/"+Img)
                     await ctx.send(embed=embed)
+                if CATEGORIES['category'] == 'enemies':
+                    name = "*"+ENEMIESINFO["Name"].get_text()+"*"
+                    img = "https://www.gensh.in/"+ENEMIESINFO["Img"]
+                    info = ENEMIESINFO["Info"]
+                    drops = ENEMIESINFO["Drops"]
+                    desc = ENEMIESINFO["Description"]
+                    page1 = discord.Embed(title="----------------------", description=info)
+                    page1.set_author(name=name)
+                    page1.set_image(url=img)
+                    page2 = discord.Embed(title="----------------------",description=desc )
+                    page2.add_field(name="Drops", value=drops, inline=False)
+                    embedlist = [page1,page2]
+                    paginator =  BotEmbedPaginator(ctx, embedlist)
+                    await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             # except asyncio.TimeoutError():
             else : print("failed") 

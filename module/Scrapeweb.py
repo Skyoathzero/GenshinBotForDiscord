@@ -155,7 +155,7 @@ def Articlescrape(isian):
             ENEMIESINFO["Drops"]=Drops
             ENEMIESINFO["Info"]=Info
             ENEMIESINFO["Description"]=Lore 
-
+            CATEGORIES["category"] = "enemies"
             print(ENEMIESINFO)        
         if contentclasifier[4]=="consumable":
             pass
