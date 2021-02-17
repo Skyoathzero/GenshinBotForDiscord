@@ -106,8 +106,9 @@ ITEMINFO = {"Name":"",
             "Info":""}
 ENEMIESINFO = {"Name": "",
                 "Img":"",
-                "Drops":""
-                }   
+                "Drops":"",
+                "Info":"",
+                "Description":""}   
 def Articlescrape(isian):
 
     search = requests.get(isian).text
@@ -123,17 +124,39 @@ def Articlescrape(isian):
             pass
         if contentclasifier[4]=="enemies":
             enemiescontainer = soup.find_all("div",attrs={"class":"row mb-4"})
+            
             container1 = enemiescontainer[0]
             container2 = enemiescontainer[1]
             Name = container1.find("h2")
-            
             infocontainer = container1.find('ul')
             info = infocontainer.find_all("li")
             info = [i.get_text() for i in info ]
             separator = "\n"
-            info = separator.join(info)
+            Info = separator.join(info)
+            Imagecontainer = container1.find_all("div",attrs={"class":"card-body"})
+            Image = Imagecontainer[1].find("img")
+            Image = Image["src"]
+            
+            dropscontainer = container2.find("div",attrs={"class":"col-sm-12 col-lg-4"})
+            drops = dropscontainer.find_all("li")
+            drops = [i.get_text() for i in drops]
+            Drops = separator.join(drops)
+            lorecontainer = container2.find("div",attrs={"class":"col-sm-12 col-lg-8"})
+            
+            lore = lorecontainer.find("div",attrs={"class":"card-body"})
+            Lore = lore.get_text()
+            # ENEMIESINFO = {"Name": "",
+            #     "Img":"",
+            #     "Drops":"",
+            #     "Info":"",
+            #     "Description":""}   
+            ENEMIESINFO["Name"]=Name
+            ENEMIESINFO["Img"]=Image
+            ENEMIESINFO["Drops"]=Drops
+            ENEMIESINFO["Info"]=Info
+            ENEMIESINFO["Description"]=Lore 
 
-
+            print(ENEMIESINFO)        
         if contentclasifier[4]=="consumable":
             pass
         if contentclasifier[4]=="domain":
@@ -291,5 +314,5 @@ def Articlescrape(isian):
 #                 'Story':'',
 #                 'Talents':'',
 #                 'Constelations':''}
-Articlescrape("https://www.gensh.in/database/item/almond")
+Articlescrape("https://www.gensh.in/database/enemies/hilichurl")
 
