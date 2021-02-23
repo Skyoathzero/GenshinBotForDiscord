@@ -158,7 +158,19 @@ def Articlescrape(isian):
             CATEGORIES["category"] = "enemies"
             print(ENEMIESINFO)        
         if contentclasifier[4]=="consumable":
-            pass
+            consumablecontainer = soup.find("section")
+            infocontainer = consumablecontainer.find("div",attrs={"class":"row mb-4"})
+            name = lambda x : x.get_text()
+            name = name(infocontainer.find("h2"))
+            
+            descriptionContainer = infocontainer.find_all('li')
+            separator = '\n'
+            description = [i.get_text() for i in descriptionContainer] 
+            description = separator.join(description)
+            
+            imgcontainer = infocontainer.find("img")
+            img = imgcontainer["src"]
+            print(img)
         if contentclasifier[4]=="domain":
             pass
         if contentclasifier[4]=="book":
@@ -314,5 +326,5 @@ def Articlescrape(isian):
 #                 'Story':'',
 #                 'Talents':'',
 #                 'Constelations':''}
-Articlescrape("https://www.gensh.in/database/enemies/hilichurl")
+Articlescrape("https://www.gensh.in/database/consumable/adeptus-temptation")
 
