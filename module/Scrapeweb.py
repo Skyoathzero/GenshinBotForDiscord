@@ -108,7 +108,12 @@ ENEMIESINFO = {"Name": "",
                 "Img":"",
                 "Drops":"",
                 "Info":"",
-                "Description":""}   
+                "Description":""}  
+CONSUMABLEINFO={"Name":"",
+                "Img":"",
+                "Info":"",
+                "Recipe":"",
+                "Lore":""}
 def Articlescrape(isian):
 
     search = requests.get(isian).text
@@ -158,6 +163,7 @@ def Articlescrape(isian):
             CATEGORIES["category"] = "enemies"
             print(ENEMIESINFO)        
         if contentclasifier[4]=="consumable":
+            
             consumablecontainer = soup.find("section")
             infocontainer = consumablecontainer.find("div",attrs={"class":"row mb-4"})
             name = lambda x : x.get_text()
@@ -170,7 +176,23 @@ def Articlescrape(isian):
             
             imgcontainer = infocontainer.find("img")
             img = imgcontainer["src"]
-            print(img)
+            
+            infocontainer2 = consumablecontainer.find("div",attrs={"class":"col-sm-12 col-md-4 col-xl-3"})
+            recipe = infocontainer2.find_all('li')
+            recipe = [i.get_text() for i in recipe]
+            recipe = separator.join(recipe)
+            
+
+            lorecontainer = consumablecontainer.find("div",attrs={"class": "col-sm-12 col-md-8 col-xl-9"})
+            lore = lorecontainer.find("p").get_text()
+            
+            CONSUMABLEINFO["Name"]=name
+            CONSUMABLEINFO["Img"]=img
+            CONSUMABLEINFO["Info"]=description
+            CONSUMABLEINFO["Recipe"]=recipe
+            CONSUMABLEINFO["Lore"]=lore
+            CATEGORIES["category"] = "consumable"
+
         if contentclasifier[4]=="domain":
             pass
         if contentclasifier[4]=="book":
