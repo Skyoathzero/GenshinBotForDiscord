@@ -3,7 +3,7 @@ from discord.ext import commands
 from disputils import BotEmbedPaginator, BotConfirmation, BotMultipleChoice
 try:
     from module import Scrapeweb
-    from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape,WEAPONINFO,ITEMINFO,ENEMIESINFO
+    from module.Scrapeweb import CHARACTERINFO,CATEGORIES,Scrape,Articlescrape,WEAPONINFO,ITEMINFO,ENEMIESINFO,CONSUMABLEINFO
     from module.Scrapeweb import INFO as informantion
 except : pass
 class search(commands.Cog):
@@ -125,6 +125,21 @@ class search(commands.Cog):
                     embedlist = [page1,page2]
                     paginator =  BotEmbedPaginator(ctx, embedlist)
                     await paginator.run()
+                if CATEGORIES['category'] == 'consumable':
+                    name = CONSUMABLEINFO["Name"]
+                    img = "https://www.gensh.in/"+CONSUMABLEINFO["Img"]
+                    info = CONSUMABLEINFO["Info"]
+                    recipe = CONSUMABLEINFO["Recipe"]
+                    lore = CONSUMABLEINFO["Lore"]
+                    page1 = discord.Embed(title="----------------------", description=info)
+                    page1.set_author(name=name)
+                    page1.set_image(url=img)
+                    page2 = discord.Embed(title="----------------------",description="" )
+                    page2.add_field(name="Recipe", value=recipe, inline=False)
+                    page2.add_field(name="Lore", value=lore, inline=False)
+                    embedlist = [page1,page2]
+                    paginator =  BotEmbedPaginator(ctx, embedlist)
+                    await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "2" and selection.content in sent:
                 print("scraping")
@@ -196,6 +211,21 @@ class search(commands.Cog):
                     page1.set_image(url=img)
                     page2 = discord.Embed(title="----------------------",description=desc )
                     page2.add_field(name="Drops", value=drops, inline=False)
+                    embedlist = [page1,page2]
+                    paginator =  BotEmbedPaginator(ctx, embedlist)
+                    await paginator.run()
+                if CATEGORIES['category'] == 'consumable':
+                    name = CONSUMABLEINFO["Name"]
+                    img = "https://www.gensh.in/"+CONSUMABLEINFO["Img"]
+                    info = CONSUMABLEINFO["Info"]
+                    recipe = CONSUMABLEINFO["Recipe"]
+                    lore = CONSUMABLEINFO["Lore"]
+                    page1 = discord.Embed(title="----------------------", description=info)
+                    page1.set_author(name=name)
+                    page1.set_image(url=img)
+                    page2 = discord.Embed(title="----------------------",description="" )
+                    page2.add_field(name="Recipe", value=recipe, inline=False)
+                    page2.add_field(name="Lore", value=lore, inline=False)
                     embedlist = [page1,page2]
                     paginator =  BotEmbedPaginator(ctx, embedlist)
                     await paginator.run()
@@ -276,6 +306,21 @@ class search(commands.Cog):
                     embedlist = [page1,page2]
                     paginator =  BotEmbedPaginator(ctx, embedlist)
                     await paginator.run()
+                if CATEGORIES['category'] == 'consumable':
+                    name = CONSUMABLEINFO["Name"]
+                    img = "https://www.gensh.in/"+CONSUMABLEINFO["Img"]
+                    info = CONSUMABLEINFO["Info"]
+                    recipe = CONSUMABLEINFO["Recipe"]
+                    lore = CONSUMABLEINFO["Lore"]
+                    page1 = discord.Embed(title="----------------------", description=info)
+                    page1.set_author(name=name)
+                    page1.set_image(url=img)
+                    page2 = discord.Embed(title="----------------------",description="" )
+                    page2.add_field(name="Recipe", value=recipe, inline=False)
+                    page2.add_field(name="Lore", value=lore, inline=False)
+                    embedlist = [page1,page2]
+                    paginator =  BotEmbedPaginator(ctx, embedlist)
+                    await paginator.run()
                 else : await ctx.send("This Category Maybe is unsuported or underdevelopment")
             if selection.content == "4"and selection.content in sent:
                 print("scraping")
@@ -350,6 +395,21 @@ class search(commands.Cog):
                     page1.set_image(url=img)
                     page2 = discord.Embed(title="----------------------",description=desc )
                     page2.add_field(name="Drops", value=drops, inline=False)
+                    embedlist = [page1,page2]
+                    paginator =  BotEmbedPaginator(ctx, embedlist)
+                    await paginator.run()
+                if CATEGORIES['category'] == 'consumable':
+                    name = CONSUMABLEINFO["Name"]
+                    img = "https://www.gensh.in/"+CONSUMABLEINFO["Img"]
+                    info = CONSUMABLEINFO["Info"]
+                    recipe = CONSUMABLEINFO["Recipe"]
+                    lore = CONSUMABLEINFO["Lore"]
+                    page1 = discord.Embed(title="----------------------", description=info)
+                    page1.set_author(name=name)
+                    page1.set_image(url=img)
+                    page2 = discord.Embed(title="----------------------",description="" )
+                    page2.add_field(name="Recipe", value=recipe, inline=False)
+                    page2.add_field(name="Lore", value=lore, inline=False)
                     embedlist = [page1,page2]
                     paginator =  BotEmbedPaginator(ctx, embedlist)
                     await paginator.run()
