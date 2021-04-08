@@ -9,6 +9,7 @@ from discord.embeds import Embed
 # from Scrapeweb import INFO as informantion
 import asyncio
 import os
+import sqlite3
 
 
 cwd = Path(__file__).parents[0]
@@ -23,6 +24,10 @@ logging.basicConfig(level=logging.INFO)
 @bot.event
 async def on_ready():
     print("logged in")
+    database = sqlite3.connect('main.sqlite')
+    cursor = database.cursor()
+    cursor.execute("""
+    """)
     await bot.change_presence(activity=discord.Game(name=f"use g! to use my command"))
 
 #Test Command
