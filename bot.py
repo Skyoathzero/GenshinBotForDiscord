@@ -225,4 +225,4 @@ async def on_command_error(ctx, error):
 #         else : print("failed") 
 #     else: await ctx.send("Sorry, No Result is Found :<")
     
-bot.run("NzYyNTIwODUyMzg2MTUyNDc4.X3qW4g.fKD4mSCJL1dWeIf1lvov2CgVAko")  
+bot.run("")  
